@@ -27,7 +27,7 @@ CREATE TABLE Matches (
     match_id SERIAL PRIMARY KEY,
     fixture VARCHAR(100) NOT NULL,
     tournament_category VARCHAR(100) NOT NULL,
-    base_ticket_price NUMERIC CHECK (base_ticket_price >= 0),
+    base_ticket_price DECIMAL(10,2) CHECK (base_ticket_price >= 0),
     match_status VARCHAR(20) CHECK (
         match_status IN ('Available', 'Selling Fast', 'Sold Out')
     )
@@ -40,7 +40,7 @@ CREATE TABLE Bookings (
   match_id INT REFERENCES Matches(match_id),
   seat_number VARCHAR(50),
   payment_status VARCHAR(50) CHECK (payment_status IN ('Confirmed', 'Pending')),
-  total_cost NUMERIC NOT NULL CHECK (total_cost >= 0)
+  total_cost DECIMAL(10,2) NOT NULL CHECK (total_cost >= 0)
 );
 
 -- DATA SEEDING: INSERT SAMPLE DATA INTO USERS -- ==========================
